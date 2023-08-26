@@ -1,0 +1,91 @@
+<!-- coinDetails.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoleV2</title>
+    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/discover.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/coin-page.css" />
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const coinId = urlParams.get('id');
+
+            fetch(`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false`)
+            .then(response => response.json())
+            .then(data => {
+                // Display coin information. For instance:
+                document.getElementById("title").textContent = data.name;
+                document.getElementById("coin-description").innerHTML = data.description.en;
+                document.getElementById("current-price").textContent = `$${data.market_data.current_price.eur.toFixed(2)} EUR`; // Assuming EUR as your currency
+                document.getElementById("market-cap").textContent = `$${data.market_data.market_cap.eur.toLocaleString()} EUR`; 
+                document.getElementById("total-volume").textContent = `$${data.market_data.total_volume.eur.toLocaleString()} EUR`;
+                document.getElementById("circulating-supply").textContent = `${data.market_data.circulating_supply.toLocaleString()} ${data.symbol.toUpperCase()}`;
+                                // Add more fields as needed.
+            })
+            .catch(error => {
+                console.error("There was an error fetching coin details", error);
+            });
+        });
+    </script>
+</head>
+<body>
+        
+    <div id="navigation">
+        <a href="../index.html">
+            <div id="logo-container">
+                <img id="page-logo" src="../images/logo/holeiconwhite.png" alt="Page logo">
+                <p id="page-name">hole</h1>
+            </div>
+        </a>
+    
+        <div id="middle-links">
+            <a href="#" id="discover-link">discover</a>
+            <a href="#" id="profile-link">profile</a>
+        </div>
+    
+        <div id="login-container">
+            <a href="#" id="login-link">log In</a>
+        </div>
+    </div>
+
+    <div id="title-div">
+        <div>
+            <h1 id="title"></h1>
+        </div>
+        <img id="title-logo" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="Hole logo">
+    </div>
+
+    <div id="coin-description">
+        <p>
+
+        </p>
+    </div>
+
+    <section id="market-data">
+        <div class="data-item">
+            <span class="label">Current Price:</span>
+            <span id="current-price" class="value"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Market Cap:</span>
+            <span id="market-cap" class="value"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Total Volume:</span>
+            <span id="total-volume" class="value"></span>
+        </div>
+        <div class="data-item">
+            <span class="label">Circulating Supply:</span>
+            <span id="circulating-supply" class="value"></span>
+        </div>
+        <!-- Add more fields as needed -->
+    </section>
+    
+
+</body>
+</html>

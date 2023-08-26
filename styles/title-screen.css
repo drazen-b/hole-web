@@ -1,0 +1,36 @@
+#title-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-size: 34px;
+}
+
+div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px; 
+    margin-right: 20px;
+}
+
+#title, #title-about {
+    margin: 0;
+    text-align: start;
+}
+
+#title-logo {
+    height: 250px;
+    width: auto;
+}
+
+#title {
+    text-align: start;
+}
+
+#title-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}

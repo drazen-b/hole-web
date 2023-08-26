@@ -1,0 +1,45 @@
+/* CSS variables */
+:root {
+    --primary-color: #050505;
+    --secondary-color: #ffffff;
+    /* --secondary-color: #BABABA; */
+    --accent-color: #00A97F;
+    --tetriary-color: #1E1D2A;
+    
+    --font-size-base: 16px;
+    --font-family-base: monospace;
+}
+
+/* Global styles */
+body {
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-base);
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    height: 100%;
+    align-items: center;
+}
+
+a {
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-base);
+    color: var(--secondary-color);
+
+}
+
+a:link { 
+    text-decoration: none; 
+}
+
+a:visited { 
+    text-decoration: none; 
+}
+
+a:hover { 
+    text-decoration: underline; 
+}
+
+a:active { 
+    text-decoration: none; 
+}
+

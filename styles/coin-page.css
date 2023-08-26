@@ -1,0 +1,78 @@
+#title-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+    font-size: 2rem;
+    margin: 5rem auto;
+}
+
+div > div {
+    display: flex;
+    align-items: start;
+    gap: 10px; 
+    margin-right: 20px;
+}
+
+#title, #title-about {
+    margin: 0;
+    text-align: start;
+}
+
+#title-logo {
+    height: 10rem;
+    width: auto;
+}
+
+#title {
+    text-align: start;
+}
+
+#title-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#coin-description {
+    padding: 20px;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 5rem auto;
+    text-align: center;
+    font-size: 16px;
+}
+
+#coin-description a {
+    color: var(--accent-color); /* Change this to your preferred link color */
+    text-decoration: none;
+    font-size: 16px;
+
+    
+}
+
+#coin-description a:hover {
+    text-decoration: underline;
+}
+
+#market-data {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Adjust according to how many columns you want */
+    gap: 20px; /* Space between items */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.data-item {
+    display: flex;
+    justify-content: space-between; /* Separates the label and value */
+}
+
+.label {
+    font-weight: bold;
+}
+
+.value {
+    color: #333;
+}

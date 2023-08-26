@@ -1,0 +1,177 @@
+#navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+body {
+    /* display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+}
+
+#navigation a {
+    margin: 0 10px;
+}
+
+#logo-container {
+    display: flex;
+    align-items: center;
+}
+
+#page-logo {
+    width: 40px;
+    height: auto;
+    margin-right: 20px;
+}
+
+#page-name {
+    margin: 0;
+    font-style: normal;
+}
+
+#middle-links {
+    order: 0;
+}
+
+#search-container {
+    margin: 10em;
+    text-align: center;
+    padding: 2em;       
+}
+
+.search-box-container {
+    margin: 3em auto;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    position: relative; /* For positioning the search button inside the input */
+    gap: 15px;
+}
+
+.round-search-box {
+    width: 30%;
+    max-width: 1500px;
+    height: 44px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 22px;
+    padding-left: 15px;
+    padding-right: 40px;
+    outline: none;
+    font-size: var(--font-size-base); /* Adjust as needed */
+}
+
+.round-search-box:focus {
+    border-color: var(--accent-color); /* Gives a focus color when the input is active, adjust color as desired */
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+    color: #777; /* Adjust the color of the search icon */
+}
+
+.search-button img {
+    height: 40px;
+}
+
+.search-button:hover {
+    color: var(--accent-color);
+}
+
+/* #top-list-container {
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+#coins-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#coin {
+    display: flex;
+    font-size: 22px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#coin div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#coin div img {
+    width: 40px;
+    height: 40px; 
+} */
+
+/* Style for the overall container */
+#top-list-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#top-list-container > p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Styles for the header row */
+#coins-info {
+    display: flex;
+    font-size: 16px;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: var(--tetriary-color);
+    text-align: center;
+}
+
+.coins-info > p {
+    flex: 1; 
+    text-align: center;
+}
+
+
+.coin {
+    font-size: 16px;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0; /* A light gray border */
+    gap: 20px;
+}
+
+.coin:hover {
+    background-color: var(--tetriary-color);
+    cursor: pointer;
+}
+
+.coin > .rank, .coin > p, .coin > div {
+    flex: 1;
+    text-align: center;
+}
+
+.coin > div > img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.coin > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
