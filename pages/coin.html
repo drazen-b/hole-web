@@ -1,7 +1,6 @@
-<!-- coinDetails.html -->
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,32 +8,11 @@
     <link rel="stylesheet" type="text/css" href="../styles/style.css" />
     <link rel="stylesheet" type="text/css" href="../styles/discover.css" />
     <link rel="stylesheet" type="text/css" href="../styles/coin-page.css" />
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const coinId = urlParams.get('id');
-
-            fetch(`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false`)
-            .then(response => response.json())
-            .then(data => {
-                // Display coin information. For instance:
-                document.getElementById("title").textContent = data.name;
-                document.getElementById("coin-description").innerHTML = data.description.en;
-                document.getElementById("current-price").textContent = `$${data.market_data.current_price.eur.toFixed(2)} EUR`; // Assuming EUR as your currency
-                document.getElementById("market-cap").textContent = `$${data.market_data.market_cap.eur.toLocaleString()} EUR`; 
-                document.getElementById("total-volume").textContent = `$${data.market_data.total_volume.eur.toLocaleString()} EUR`;
-                document.getElementById("circulating-supply").textContent = `${data.market_data.circulating_supply.toLocaleString()} ${data.symbol.toUpperCase()}`;
-                                // Add more fields as needed.
-            })
-            .catch(error => {
-                console.error("There was an error fetching coin details", error);
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 </head>
+
 <body>
-        
     <div id="navigation">
         <a href="../index.html">
             <div id="logo-container">
@@ -42,14 +20,12 @@
                 <p id="page-name">hole</h1>
             </div>
         </a>
-    
         <div id="middle-links">
-            <a href="#" id="discover-link">discover</a>
-            <a href="#" id="profile-link">profile</a>
+            <a href="./discover.html" id="discover-link">discover</a>
+            <a href="./profile.html" id="profile-link">profile</a>
         </div>
-    
         <div id="login-container">
-            <a href="#" id="login-link">log In</a>
+            <a href="./login.html" id="login-link">log In</a>
         </div>
     </div>
 
@@ -57,14 +33,27 @@
         <div>
             <h1 id="title"></h1>
         </div>
-        <img id="title-logo" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579" alt="Hole logo">
+        <img id="title-logo" src="https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579"
+            alt="Coin logo">
     </div>
-
     <div id="coin-description">
         <p>
-
         </p>
     </div>
+
+    <section id="add-to-portfolio">
+        <h2>Add to Portfolio</h2>
+        <div class="data-item">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" min="0">
+        </div>
+        <div class="data-item">
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" min="0">
+        </div>
+        <button id="add-button">Add</button>
+    </section>
+    
 
     <section id="market-data">
         <div class="data-item">
@@ -85,7 +74,119 @@
         </div>
         <!-- Add more fields as needed -->
     </section>
-    
+    <div id="price-chart-container">
+        <canvas id="priceChart"></canvas>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const coinId = urlParams.get('id');
 
+            fetch(`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("title-logo").src = data.image.large;
+                    document.getElementById("title").textContent = data.name;
+                    document.getElementById("coin-description").innerHTML = data.description.en;
+                    document.getElementById("current-price").textContent = `$${data.market_data.current_price.eur.toFixed(2)} EUR`;
+                    document.getElementById("market-cap").textContent = `$${data.market_data.market_cap.eur.toLocaleString()} EUR`;
+                    document.getElementById("total-volume").textContent = `$${data.market_data.total_volume.eur.toLocaleString()} EUR`;
+                    document.getElementById("circulating-supply").textContent = `${data.market_data.circulating_supply.toLocaleString()} ${data.symbol.toUpperCase()}`;
+                    const priceChange = data.market_data.price_change_percentage_24h;
+                    const marketCapChange = data.market_data.market_cap_change_percentage_24h;
+                    document.getElementById("current-price").textContent = `$${data.market_data.current_price.eur.toFixed(2)} EUR`;
+                    document.getElementById("current-price").style.color = priceChange < 0 ? 'red' : 'green';
+                    document.getElementById("market-cap").textContent = `$${data.market_data.market_cap.eur.toLocaleString()} EUR`;
+                    document.getElementById("market-cap").style.color = marketCapChange < 0 ? 'red' : 'green';
+
+                    fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=eur&days=365&interval=daily`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const ctx = document.getElementById('priceChart').getContext('2d');
+                            const priceChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: data.prices.map(price => new Date(price[0])),
+                                    datasets: [{
+                                        label: 'Price (EUR)',
+                                        data: data.prices.map(price => price[1]),
+                                        borderColor: 'white',
+                                        backgroundColor: 'rgba(75, 75, 75, 0.2)',
+                                        fill: true,
+                                    }]
+                                },
+                                options: {
+                                    plugins: {
+                                        legend: {
+                                            labels: {
+                                                color: 'white',
+                                                font: {
+                                                    family: 'monospace',
+                                                    size: 16,
+                                                    style: 'bold',
+                                                },
+                                            },
+                                        },
+                                    },
+                                    scales: {
+                                        x: {
+                                            type: 'time',
+                                            time: {
+                                                unit: 'month',
+                                                displayFormats: {
+                                                    month: 'MMM yyyy'
+                                                }
+                                            },
+                                            ticks: {
+                                                color: 'grey',
+                                                font: {
+                                                    family: 'monospace',
+                                                    size: 14,
+                                                    style: 'normal',
+                                                },
+                                            },
+                                            grid: {
+                                                color: 'grey',
+                                            },
+                                        },
+                                        y: {
+                                            beginAtZero: false,
+                                            ticks: {
+                                                color: 'grey',
+                                                font: {
+                                                    family: 'monospace',
+                                                    size: 14,
+                                                    style: 'normal',
+                                                },
+                                            },
+                                            grid: {
+                                                color: 'grey',
+                                            },
+                                        }
+                                    },
+                                    layout: {
+                                        padding: {
+                                            left: 10,
+                                            right: 10,
+                                            top: 10,
+                                            bottom: 10
+                                        }
+                                    },
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    backgroundColor: 'black'
+                                }
+                            });
+                        })
+                        .catch(error => {
+                            console.error("There was an error fetching the market chart data", error);
+                        });
+                })
+                .catch(error => {
+                    console.error("There was an error fetching coin details", error);
+                });
+        });
+    </script>
 </body>
+
 </html>

@@ -11,6 +11,10 @@ body {
     align-items: center;
 }
 
+#navigation {
+    max-width: 1500px;
+}
+
 #navigation a {
     margin: 0 10px;
 }
@@ -51,7 +55,7 @@ body {
 }
 
 .round-search-box {
-    width: 30%;
+    width: 55%;
     max-width: 1500px;
     height: 44px;
     border: 1px solid var(--secondary-color);

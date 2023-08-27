@@ -7,6 +7,10 @@
     margin: 5rem auto;
 }
 
+#title-div a {
+    font-size: 1rem;
+}
+
 div > div {
     display: flex;
     align-items: start;
@@ -41,7 +45,7 @@ div > div {
     max-width: 800px;
     margin: 5rem auto;
     text-align: center;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 #coin-description a {
@@ -59,7 +63,7 @@ div > div {
 #market-data {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Adjust according to how many columns you want */
-    gap: 20px; /* Space between items */
+    gap: 50px; /* Space between items */
     padding: 20px;
     border-radius: 8px;
 }
@@ -71,8 +75,71 @@ div > div {
 
 .label {
     font-weight: bold;
+    font-size: var(--font-size-base);
 }
 
 .value {
-    color: #333;
+    color: var(--accent-color);
+}
+
+#price-chart-container {
+    width: 90%; 
+    margin: 100px auto;
+    /* height: 200px; */
+}
+
+#add-to-portfolio {
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+#add-to-portfolio .data-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#add-to-portfolio .data-item label {
+    width: 100px;
+}
+
+#add-to-portfolio .data-item input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#add-to-portfolio #add-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+#add-to-portfolio #add-button:hover {
+    background-color: #555;
+}
+
+#add-to-portfolio .data-item input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: end;
+    font-size: var(--font-size-base);
+    font-family: var(--font-family-base);
+    color: var(--accent-color);
+    background-color: var(--tetriary-color); /* gray background */
+    appearance: none; /* remove arrows */
+    -moz-appearance: textfield; /* remove arrows for Firefox */
+}
+
+#add-to-portfolio .data-item input::-webkit-outer-spin-button,
+#add-to-portfolio .data-item input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
