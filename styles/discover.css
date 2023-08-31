@@ -8,8 +8,9 @@
 body {
     /* display: flex;
     justify-content: center; /* Center horizontally */
-    align-items: center;
+    /* /* align-items: center  */
 }
+
 
 #navigation {
     max-width: 1500px;
@@ -36,6 +37,8 @@ body {
 }
 
 #middle-links {
+    display: flex;
+    flex-direction: row;
     order: 0;
 }
 
@@ -43,11 +46,22 @@ body {
     margin: 10em;
     text-align: center;
     padding: 2em;       
+    justify-content: center;
+}
+
+#search-about {
+    margin: auto;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
 }
 
 .search-box-container {
     margin: 3em auto;
     display: flex;
+    flex-direction: row;
     align-items: center; 
     justify-content: center;
     position: relative; /* For positioning the search button inside the input */
@@ -77,6 +91,12 @@ body {
     font-size: 16px;
     outline: none;
     color: #777; /* Adjust the color of the search icon */
+}
+
+#search-results {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-button img {
@@ -133,6 +153,7 @@ body {
 /* Styles for the header row */
 #coins-info {
     display: flex;
+    flex-direction: row;
     font-size: 16px;
     justify-content: space-around;
     padding: 10px 0;
@@ -151,10 +172,16 @@ body {
 .coin {
     font-size: 16px;
     display: flex;
+    flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #e0e0e0; /* A light gray border */
     gap: 20px;
+}
+
+.coin p {
+    margin: auto;
 }
 
 .coin:hover {
@@ -170,12 +197,48 @@ body {
 .coin > div > img {
     width: 20px;
     height: 20px;
-    margin-right: 10px;
     vertical-align: middle;
 }
 
 .coin > div {
+    margin: 10px 0px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: var(--primary-color);
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: var(--secondary-color);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--tetriary-color);
+    text-decoration: none;
+    cursor: pointer;
 }

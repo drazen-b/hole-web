@@ -1,16 +1,29 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HoleV2</title>
-    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/discover.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/title-screen.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/discover.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/login.css" />
 </head>
 <body>
 
+    <div id="title-div">
+        <div>
+            <h1 id="title">Hole</h1>
+            <p id="title-about">Crypto portfolio</p>
+        </div>
+        <img id="title-logo" src="./images/logo/holeiconwhite.png" alt="Hole logo">
+    </div>
+
     <div id="navigation">
-        <a href="../index.html">
+        <a href="./index.php">
             <div id="logo-container">
                 <img id="page-logo" src="../images/logo/holeiconwhite.png" alt="Page logo">
                 <p id="page-name">hole</h1>
@@ -18,15 +31,35 @@
         </a>
     
         <div id="middle-links">
-            <a href="./discover.html" id="discover-link">discover</a>
-            <a href="./profile.html" id="profile-link">profile</a>
+            <a href="#search-container" id="discover-link">discover</a>
+            <a href="./profile.php" id="profile-link">profile</a>
         </div>
     
         <div id="login-container">
-            <a href="./login.php" id="login-link">log In</a>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo '<a href="logout.php" id="logout-link">Logout</a>';
+            } else {
+                echo '<a href="#myModal" id="login-link">Login</a>';
+            }
+            ?>
+        </div>
+
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+                <form action="login.php" method="POST">
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit">Login</button>
+                </form>
+            <p>Don't have an account? <a href="./registration.php">Register here</a>.</p>
         </div>
     </div>
-    
+
+
     <div id="search-container">
         <div id="search-about">
             <p>Search for wanted cryptocurrencies bellow. </p>
@@ -99,6 +132,7 @@
                     const p = document.createElement("p");
                     p.textContent = `${coin.name} (${coin.symbol}) - ${coin.id}`;
                     resultsContainer.appendChild(p);
+
                 });
             }
 
@@ -145,16 +179,33 @@
         });
 
         function showCoinDetails(coinId) {
-            window.location.href = `./coin.html?id=${coinId}`;
+            window.location.href = `./coin.php?id=${coinId}`;
         }
         
 
+        }
+    });
+
+    var modal = document.getElementById("myModal");
+var btn = document.getElementById("login-link");
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
     }
-        });
-        </script>
-        
-        
-        
+}
+    </script>
+
+
 
 </body>
 </html>

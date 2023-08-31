@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,18 +17,24 @@
 
 <body>
     <div id="navigation">
-        <a href="../index.html">
+        <a href="../index.php">
             <div id="logo-container">
                 <img id="page-logo" src="../images/logo/holeiconwhite.png" alt="Page logo">
                 <p id="page-name">hole</h1>
             </div>
         </a>
         <div id="middle-links">
-            <a href="../index.html" id="discover-link">discover</a>
-            <a href="./profile.html" id="profile-link">profile</a>
+            <a href="../index.php" id="discover-link">discover</a>
+            <a href="./profile.php" id="profile-link">profile</a>
         </div>
         <div id="login-container">
-            <a href="./login.html" id="login-link">log In</a>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo '<a href="logout.php" id="logout-link">Logout</a>';
+            } else {
+                echo '<a href="#myModal" id="login-link">Login</a>';
+            }
+            ?>
         </div>
     </div>
 
@@ -41,7 +50,7 @@
         </p>
     </div>
 
-    <form id="add-to-portfolio" action="buy_coin.html" method="post">
+    <form id="add-to-portfolio" action="buy_coin.php" method="post">
         <h2>Add to Portfolio</h2>
         <div class="data-item">
             <label for="amount">Amount:</label>
