@@ -1,7 +1,7 @@
 <?php
 session_start();
-$username = $_SESSION['username'] ?? 'Guest';
-$email = $_SESSION['email'] ?? 'Not available';
+$username = $_SESSION['username'] ?? 'Not logged in';
+$email = $_SESSION['email'] ?? 'Not logged in';
 ?>
 <html lang="en">
 
@@ -57,7 +57,7 @@ $email = $_SESSION['email'] ?? 'Not available';
         <img src="./images/logo/profile.png" alt="Profile image" id="profile-image">
         <div class="profile-container">
             <h2>My Profile</h2>
-            <p>Name:
+            <p>Userame:
                 <?php echo $username; ?>
             </p>
             <p>Email:

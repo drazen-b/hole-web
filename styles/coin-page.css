@@ -83,9 +83,14 @@ div > div {
 }
 
 #price-chart-container {
-    width: 90%; 
-    margin: 100px auto;
-    /* height: 200px; */
+    margin: 0 auto;
+    width: 90%;
+    height: auto;
+}
+
+#price-chart {
+    width: fit-content;
+    height: auto;
 }
 
 #add-to-portfolio {

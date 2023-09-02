@@ -98,7 +98,7 @@ session_start();
         </div>
     </section>
     <div id="price-chart-container">
-        <canvas id="priceChart"></canvas>
+        <canvas id="price-chart"></canvas>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -125,7 +125,7 @@ session_start();
                     fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=eur&days=365&interval=daily`)
                         .then(response => response.json())
                         .then(data => {
-                            const ctx = document.getElementById('priceChart').getContext('2d');
+                            const ctx = document.getElementById('price-chart').getContext('2d');
                             const priceChart = new Chart(ctx, {
                                 type: 'line',
                                 data: {
@@ -146,7 +146,6 @@ session_start();
                                                 font: {
                                                     family: 'monospace',
                                                     size: 16,
-                                                    style: 'bold',
                                                 },
                                             },
                                         },

@@ -132,9 +132,16 @@ session_start();
                 results.slice(0, 10).forEach(coin => {
                     const p = document.createElement("p");
                     p.textContent = `${coin.name} (${coin.symbol}) - ${coin.id}`;
+                    p.className = "coin-search-result"
+                    p.onclick = function () {
+                        showCoinDetails(coin.id);
+                    };
                     resultsContainer.appendChild(p);
-
                 });
+
+                function showCoinDetails(coinId) {
+                    window.location.href = `./coin.php?id=${coinId}`;
+                }
             }
 
             // Fetch top coins from the CoinGecko API and display them
