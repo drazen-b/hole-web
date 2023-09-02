@@ -21,10 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header('Location: profile.php');
             exit;
         } else {
-            echo "Incorrect password";
+            echo '<script type="text/javascript">
+                alert("Wrong password!");
+                window.location.href = "./index.php";
+                </script>';
         }
     } else {
-        echo "Username does not exist";
+        echo '<script type="text/javascript">
+            alert("Username does not exist!");
+            window.location.href = "./index.php";
+            </script>';
     }
 }
 

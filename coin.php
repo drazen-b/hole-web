@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,11 +30,24 @@
         <div id="login-container">
             <?php
             if (isset($_SESSION['username'])) {
-                echo '<a href="logout.php" id="logout-link">Logout</a>';
+                echo '<a href="logout.php" id="logout-link">logout</a>';
             } else {
-                echo '<a href="#myModal" id="login-link">Login</a>';
+                echo '<a href="#myModal" id="login-link">login</a>';
             }
             ?>
+        </div>
+
+    </div>
+
+    <div id="loginModal" class="logModal">
+        <div class="loginModal-content">
+            <span class="close">&times;</span>
+            <form action="login.php" method="POST">
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <button type="submit">login</button>
+            </form>
+            <p>Don't have an account? <a href="./registration.php">Register here</a>.</p>
         </div>
     </div>
 
@@ -63,8 +76,8 @@
         <input type="hidden" id="coinId" name="coinId">
         <button type="submit" id="add-button">Add</button>
     </form>
-    
-    
+
+
 
     <section id="market-data">
         <div class="data-item">
@@ -196,6 +209,24 @@
                     console.error("There was an error fetching coin details", error);
                 });
         });
+
+        var modal = document.getElementById("loginModal");
+        var btn = document.getElementById("login-link");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function () {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 

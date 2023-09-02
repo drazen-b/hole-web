@@ -25,19 +25,26 @@
                 <a href="./profile.php" id="profile-link">profile</a>
             </div>
             <div id="login-container">
-                <a href="#" id="login-link">log In</a>
-            </div>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo '<a href="logout.php" id="logout-link">logout</a>';
+            } else {
+                echo '<a href="#myModal" id="login-link">login</a>';
+            }
+            ?>
+        </div>
+
     </div>
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
+    <div id="loginModal" class="logModal">
+        <div class="loginModal-content">
             <span class="close">&times;</span>
-            <form action="YOUR_BACKEND_SCRIPT.php" method="POST">
+            <form action="login.php" method="POST">
                 <input type="text" name="username" placeholder="Username">
                 <input type="password" name="password" placeholder="Password">
-                <button type="submit">Login</button>
+                <button type="submit">login</button>
             </form>
-            <!-- <p>Don't have an account? <a href="./registration.php">Register here</a>.</p> -->
+            <p>Don't have an account? <a href="./registration.php">Register here</a>.</p>
         </div>
     </div>
 
@@ -54,7 +61,7 @@
     </div>
 
     <script>
-        var modal = document.getElementById("myModal");
+        var modal = document.getElementById("loginModal");
         var btn = document.getElementById("login-link");
         var span = document.getElementsByClassName("close")[0];
 
