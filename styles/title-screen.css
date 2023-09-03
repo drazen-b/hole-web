@@ -4,6 +4,8 @@
     justify-content: center;
     height: 100vh;
     font-size: 34px;
+    background-color: var(--primary-color);
+    z-index: 1001;
 }
 
 #title-div div {
@@ -38,3 +40,4 @@
 .coin-search-result:hover {
     color: var(--accent-color);
 }
+

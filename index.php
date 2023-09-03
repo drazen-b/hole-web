@@ -78,7 +78,7 @@ session_start();
     </div>
 
     <div id="top-list-container">
-        <p>Top 100 currencies</p>
+        <h2 class="top-100">Top 100 currencies</h2>
 
         <div id="coins-info">
             <p>#</p>

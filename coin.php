@@ -75,8 +75,10 @@ session_start();
             <label for="price">Price:</label>
             <input type="number" id="price" name="price" min="0">
         </div>
+        <div>
         <input type="hidden" id="coinId" name="coinId" value="<?php echo $_GET['id']; ?>">
         <button type="submit" id="add-button">Add</button>
+        </div>
     </form>
 
 

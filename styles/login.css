@@ -15,6 +15,10 @@ body, html {
     align-items: center;
 }
 
+.register-form {
+    margin-top: 100px;
+}
+
 .login-form input, .register-form input {
     width: 100%;
     padding: 10px;

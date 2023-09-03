@@ -4,7 +4,7 @@ include 'db.php'; // include your database connection file
 
 // Check if user is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+    header("Location: registration.php");
     exit();
 }
 

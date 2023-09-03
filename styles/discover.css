@@ -1,9 +1,18 @@
 #navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
+    z-index: 500;
+    max-width: 1200px;
+    background-color: var(--primary-color);
 }
+
 
 body {
     /* display: flex;
@@ -11,10 +20,6 @@ body {
     /* /* align-items: center  */
 }
 
-
-#navigation {
-    max-width: 1500px;
-}
 
 #navigation a {
     margin: 0 10px;
@@ -244,3 +249,20 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+.profile-coins {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.coin form {
+    width: 100%;
+    border-bottom: none;
+}
+
+.coin input {
+    width: 80%;
+}
+

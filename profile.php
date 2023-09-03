@@ -2,6 +2,11 @@
 session_start();
 include 'db.php'; // include your database connection file
 
+if (!isset($_SESSION['username'])) {
+    header('Location: registration.php');
+    exit();
+}
+
 $username = $_SESSION['username'] ?? 'Not logged in';
 $email = $_SESSION['email'] ?? 'Not logged in';
 
@@ -15,12 +20,12 @@ if ($result->num_rows > 0) {
     exit();
 }
 
-// Get all CoinIDs purchased by the user
-$result = $con->query("SELECT CoinID FROM UserCryptoPurchases WHERE UserID = '$userId'");
-$coins = [];
+// Get all purchases made by the user
+$result = $con->query("SELECT CoinID, Amount, Price FROM UserCryptoPurchases WHERE UserID = '$userId'");
+$purchases = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $coins[] = $row['CoinID'];
+        $purchases[] = $row;
     }
 }
 ?>
@@ -79,25 +84,76 @@ if ($result->num_rows > 0) {
         <img src="./images/logo/profile.png" alt="Profile image" id="profile-image">
         <div class="profile-container">
             <h2>My Profile</h2>
-            <p>Userame:
+            <p>Username:
                 <?php echo $username; ?>
             </p>
             <p>Email:
                 <?php echo $email; ?>
             </p>
-            <h3>My Coins</h3>
-            <?php
-            if (!empty($coins)) {
-                foreach ($coins as $coinId) {
-                    echo '<p>Coin ID: ' . $coinId . '</p>';
-                }
-            } else {
-                echo '<p>You have not purchased any coins yet.</p>';
-            }
-            ?>
         </div>
     </div>
 
+    <h3>My Coins</h3>
+
+
+    <div class="profile-coins">
+        <div id="coins-info">
+            <p>Coin Name</p>
+            <p>Amount</p>
+            <p>Worth €</p>
+            <p>Current Price €</p>
+            <p>Profit €</p>
+            <p>Modify</p>
+        </div>
+
+        <?php
+        if (!empty($purchases)) {
+            foreach ($purchases as $purchase) {
+                $coinId = $purchase['CoinID'];
+                $amount = $purchase['Amount'];
+                $buyingPrice = $purchase['Price'];
+
+                // Fetch current price from CoinGecko API
+                $url = "https://api.coingecko.com/api/v3/simple/price?ids=" . $coinId . "&vs_currencies=eur";
+                $json = file_get_contents($url);
+                $data = json_decode($json, true);
+                $currentPrice = $data[$coinId]['eur'];
+
+                // Calculate worth, profit
+                $worth = $currentPrice * $amount;
+                $profit = $amount * $buyingPrice - $worth;
+                ?>
+                <div class="coin">
+                    <form class="coin" method="POST" action="modify_sell_coin.php">
+                        <input type="hidden" name="coinId" value="<?php echo $coinId; ?>">
+                        <p>
+                            <?php echo $coinId; ?>
+                        </p>
+                        <p>
+                            <?php echo $amount; ?>
+                        </p>
+                        <p>€
+                            <?php echo $worth; ?>
+                        </p>
+                        <p style="color: <?php echo ($currentPrice >= $buyingPrice) ? 'green' : 'red'; ?>">
+                            €<?php echo $currentPrice; ?>
+                        </p>
+                        <p style="color: <?php echo ($profit >= 0) ? 'green' : 'red'; ?>">
+                            €<?php echo $profit; ?>
+                        </p>
+                        <div>
+                            <input type="number" name="sellAmount" min="0" max="<?php echo $amount; ?>" step="0.00000001" required>
+                            <button type="submit" name="sell">Sell</button>
+                        </div>
+                    </form>
+                </div>
+                <?php
+            }
+        } else {
+            echo '<p>You have not purchased any coins yet.</p>';
+        }
+        ?>
+    </div>
     <script>
         var modal = document.getElementById("loginModal");
         var btn = document.getElementById("login-link");
