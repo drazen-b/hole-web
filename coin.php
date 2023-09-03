@@ -1,4 +1,5 @@
 <?php
+include 'db.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -7,6 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/logo/holeiconwhite.png">
     <title>HoleV2</title>
     <link rel="stylesheet" type="text/css" href="../styles/style.css" />
     <link rel="stylesheet" type="text/css" href="../styles/discover.css" />
@@ -73,9 +75,10 @@ session_start();
             <label for="price">Price:</label>
             <input type="number" id="price" name="price" min="0">
         </div>
-        <input type="hidden" id="coinId" name="coinId">
+        <input type="hidden" id="coinId" name="coinId" value="<?php echo $_GET['id']; ?>">
         <button type="submit" id="add-button">Add</button>
     </form>
+
 
 
 

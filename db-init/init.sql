@@ -2,7 +2,7 @@ USE web;
 
 CREATE TABLE UserAccounts (
     UserID INT NOT NULL AUTO_INCREMENT,
-    Username VARCHAR(50) NOT NULL,
+    Username VARCHAR(50) UNIQUE,
     Email VARCHAR(100) UNIQUE,
     PasswordHash VARCHAR(255),
     CreateDateTime DATETIME NOT NULL,
@@ -10,23 +10,15 @@ CREATE TABLE UserAccounts (
     PRIMARY KEY (UserID)
 );
 
--- INSERT INTO UserAccounts (FirstName, LastName, Email, PasswordHash, IsAdmin)
--- VALUES ('John', 'Doe', 'john.doe@example.com', '$2y$10$hbbpi0/MV04nMb2A5NMj.unoeBf4Mvz1c9rk.FoQ/cl4lwRDXAmZC', TRUE);
+INSERT INTO UserAccounts (Username, Email, PasswordHash, CreateDateTime, IsAdmin) -- password is "password"
+VALUES ('admin', 'admin@example.com', '$2y$10$dHZoN7jL.Za1fqCKZXrSROqMEWGkr1TDAewOlQ1EIKX.lQp1FvvYa', '2023-09-03 12:58:32', TRUE);
 
-CREATE TABLE Coins (
-    CoinID INT AUTO_INCREMENT,
-    Name VARCHAR(50),
-    Symbol VARCHAR(10),
-    PRIMARY KEY (CoinID)
-);
-
-CREATE TABLE UserCoins (
-    UserCoinID INT AUTO_INCREMENT,
-    UserID INT,
-    CoinID INT,
-    Amount DECIMAL(18, 8),
-    PriceWhenBought DECIMAL(18, 8),
-    PRIMARY KEY (UserCoinID),
-    FOREIGN KEY (UserID) REFERENCES UserAccounts(UserID),
-    FOREIGN KEY (CoinID) REFERENCES Coins(CoinID)
+CREATE TABLE UserCryptoPurchases (
+    PurchaseID INT NOT NULL AUTO_INCREMENT,
+    UserID INT NOT NULL,
+    CoinID VARCHAR(50) NOT NULL,
+    Amount DECIMAL(18, 8) NOT NULL,
+    Price DECIMAL(18, 2) NOT NULL,
+    PRIMARY KEY (PurchaseID),
+    FOREIGN KEY (UserID) REFERENCES UserAccounts(UserID)
 );

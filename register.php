@@ -13,9 +13,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query = "INSERT INTO UserAccounts (Username, Email, PasswordHash, CreateDateTime) VALUES ('$username', '$email', '$hashed_password', '$createdatetime')";
 
     if (mysqli_query($con, $query)) {
-        echo "New record created successfully";
+        echo '<script type="text/javascript">
+        alert("Succesfully registered, please log in!");
+        window.location.href = "./index.php";
+        </script>';
     } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($con);
+        $error = mysqli_error($con);
+
+        if (strpos($error, 'Duplicate entry!') !== false) {
+            if (strpos($error, 'UserAccounts.Email') !== false) {
+                $errorMessage = "Email is already used!";
+            } elseif (strpos($error, 'UserAccounts.Username') !== false) {
+                $errorMessage = "Username is already used!";
+            } else {
+                $errorMessage = "Duplicate entry!";
+            }
+        } else {
+            $errorMessage = "Error: " . $query . "<br>" . $error;
+        }
+        
+        echo '<script type="text/javascript">
+                alert("' . $errorMessage . '");
+                window.location.href = "./index.php";
+              </script>';
+
     }
 
     mysqli_close($con);
