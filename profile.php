@@ -1,8 +1,30 @@
 <?php
 session_start();
+include 'db.php'; // include your database connection file
+
 $username = $_SESSION['username'] ?? 'Not logged in';
 $email = $_SESSION['email'] ?? 'Not logged in';
+
+// Get UserID from the database
+$result = $con->query("SELECT UserID FROM UserAccounts WHERE Username = '$username'");
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $userId = $row['UserID'];
+} else {
+    // Handle error - user not found
+    exit();
+}
+
+// Get all CoinIDs purchased by the user
+$result = $con->query("SELECT CoinID FROM UserCryptoPurchases WHERE UserID = '$userId'");
+$coins = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $coins[] = $row['CoinID'];
+    }
+}
 ?>
+
 <html lang="en">
 
 <head>
@@ -63,6 +85,16 @@ $email = $_SESSION['email'] ?? 'Not logged in';
             <p>Email:
                 <?php echo $email; ?>
             </p>
+            <h3>My Coins</h3>
+            <?php
+            if (!empty($coins)) {
+                foreach ($coins as $coinId) {
+                    echo '<p>Coin ID: ' . $coinId . '</p>';
+                }
+            } else {
+                echo '<p>You have not purchased any coins yet.</p>';
+            }
+            ?>
         </div>
     </div>
 
