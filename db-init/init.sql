@@ -22,3 +22,4 @@ CREATE TABLE UserCryptoPurchases (
     PRIMARY KEY (PurchaseID),
     FOREIGN KEY (UserID) REFERENCES UserAccounts(UserID)
 );
+

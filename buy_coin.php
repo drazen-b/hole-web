@@ -1,21 +1,18 @@
 <?php
 session_start();
-include 'db.php'; // include your database connection file
+include 'db.php';
 
-// Check if user is logged in
 if (!isset($_SESSION['username'])) {
     header("Location: registration.php");
     exit();
 }
 
-// Get UserID from the database
 $username = $_SESSION['username'];
 $result = $con->query("SELECT UserID FROM UserAccounts WHERE Username = '$username'");
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $userId = $row['UserID'];
 } else {
-    // Handle error - user not found
     exit();
 }
 
@@ -25,7 +22,6 @@ $price = $_POST['price'];
 
 $stmt = $con->prepare("INSERT INTO UserCryptoPurchases (UserID, CoinID, Amount, Price) VALUES (?, ?, ?, ?)");
 if ($stmt === false) {
-    // Handle error - the prepare statement failed
     echo "Error: " . $con->error;
     exit();
 }

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'db.php'; // include your database connection file
+include 'db.php';
 
 if (!isset($_SESSION['username'])) {
     header('Location: registration.php');
@@ -10,17 +10,14 @@ if (!isset($_SESSION['username'])) {
 $username = $_SESSION['username'] ?? 'Not logged in';
 $email = $_SESSION['email'] ?? 'Not logged in';
 
-// Get UserID from the database
 $result = $con->query("SELECT UserID FROM UserAccounts WHERE Username = '$username'");
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $userId = $row['UserID'];
 } else {
-    // Handle error - user not found
     exit();
 }
 
-// Get all purchases made by the user
 $result = $con->query("SELECT CoinID, Amount, Price FROM UserCryptoPurchases WHERE UserID = '$userId'");
 $purchases = [];
 if ($result->num_rows > 0) {
@@ -36,9 +33,9 @@ if ($result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/discover.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/profile.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/discover.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/profile.css" />
 </head>
 
 <body>
@@ -98,12 +95,12 @@ if ($result->num_rows > 0) {
 
     <div class="profile-coins">
         <div id="coins-info">
-            <p>Coin Name</p>
-            <p>Amount</p>
-            <p>Worth €</p>
-            <p>Current Price €</p>
-            <p>Profit €</p>
-            <p>Modify</p>
+            <p class="coin-name">Coin Name</p>
+            <p class="coin-amount">Amount</p>
+            <p class="coin-worth">Worth €</p>
+            <p class="coin-price">Current Price €</p>
+            <p class="coin-profit">Profit €</p>
+            <p class="coin-modify">Sell</p>
         </div>
 
         <?php
@@ -113,37 +110,35 @@ if ($result->num_rows > 0) {
                 $amount = $purchase['Amount'];
                 $buyingPrice = $purchase['Price'];
 
-                // Fetch current price from CoinGecko API
                 $url = "https://api.coingecko.com/api/v3/simple/price?ids=" . $coinId . "&vs_currencies=eur";
                 $json = file_get_contents($url);
                 $data = json_decode($json, true);
                 $currentPrice = $data[$coinId]['eur'];
 
-                // Calculate worth, profit
                 $worth = $currentPrice * $amount;
                 $profit = $amount * $buyingPrice - $worth;
                 ?>
                 <div class="coin">
                     <form class="coin" method="POST" action="modify_sell_coin.php">
                         <input type="hidden" name="coinId" value="<?php echo $coinId; ?>">
-                        <p>
+                        <p class="coin-name">
                             <?php echo $coinId; ?>
                         </p>
-                        <p>
-                            <?php echo $amount; ?>
+                        <p class="coin-amount">
+                            <?php echo number_format($amount, 2); ?>
                         </p>
-                        <p>€
+                        <p class="coin-worth">€
                             <?php echo $worth; ?>
                         </p>
-                        <p style="color: <?php echo ($currentPrice >= $buyingPrice) ? 'green' : 'red'; ?>">
+                        <p class="coin-price" style="color: <?php echo ($currentPrice >= $buyingPrice) ? 'green' : 'red'; ?>">
                             €<?php echo $currentPrice; ?>
                         </p>
-                        <p style="color: <?php echo ($profit >= 0) ? 'green' : 'red'; ?>">
+                        <p class="coin-profit" style="color: <?php echo ($profit >= 0) ? 'green' : 'red'; ?>">
                             €<?php echo $profit; ?>
                         </p>
                         <div>
                             <input type="number" name="sellAmount" min="0" max="<?php echo $amount; ?>" step="0.00000001" required>
-                            <button type="submit" name="sell">Sell</button>
+                            <button  type="submit" name="sell">Sell</button>
                         </div>
                     </form>
                 </div>
@@ -154,6 +149,17 @@ if ($result->num_rows > 0) {
         }
         ?>
     </div>
+
+    <footer>
+        <div class="footer-holder">
+            <p>Web LV3</p>
+            <div>
+                <p>Made by: Drazen Bertic</p>
+                <a href="https://www.coingecko.com/en/api">Powered by CoinGecko API!</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
         var modal = document.getElementById("loginModal");
         var btn = document.getElementById("login-link");

@@ -9,10 +9,10 @@ include 'db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./images/logo/holeiconwhite.png">
     <title>HoleV2</title>
-    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/title-screen.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/login.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/discover.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/title-screen.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/login.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/discover.css" />
 </head>
 
 <body>
@@ -63,6 +63,16 @@ include 'db.php';
             </form>
         </div>
     </div>
+
+    <footer>
+        <div class="footer-holder">
+            <p>Web LV3</p>
+            <div>
+                <p>Made by: Drazen Bertic</p>
+                <a href="https://www.coingecko.com/en/api">Powered by CoinGecko API!</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         var modal = document.getElementById("loginModal");

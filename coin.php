@@ -10,14 +10,16 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./images/logo/holeiconwhite.png">
     <title>HoleV2</title>
-    <link rel="stylesheet" type="text/css" href="../styles/style.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/discover.css" />
-    <link rel="stylesheet" type="text/css" href="../styles/coin-page.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/discover.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/coin-page.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
 </head>
 
 <body>
+
+
     <div id="navigation">
         <a href="../index.php">
             <div id="logo-container">
@@ -76,13 +78,10 @@ session_start();
             <input type="number" id="price" name="price" min="0">
         </div>
         <div>
-        <input type="hidden" id="coinId" name="coinId" value="<?php echo $_GET['id']; ?>">
-        <button type="submit" id="add-button">Add</button>
+            <input type="hidden" id="coinId" name="coinId" value="<?php echo $_GET['id']; ?>">
+            <button type="submit" id="add-button">Add</button>
         </div>
     </form>
-
-
-
 
     <section id="market-data">
         <div class="data-item">
@@ -105,6 +104,18 @@ session_start();
     <div id="price-chart-container">
         <canvas id="price-chart"></canvas>
     </div>
+
+
+    <footer>
+        <div class="footer-holder">
+            <p>Web LV3</p>
+            <div>
+                <p>Made by: Drazen Bertic</p>
+                <a href="https://www.coingecko.com/en/api">Powered by CoinGecko API!</a>
+            </div>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const urlParams = new URLSearchParams(window.location.search);

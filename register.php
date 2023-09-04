@@ -1,7 +1,6 @@
 <?php
 include 'db.php';
 
-// check if form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $username = mysqli_real_escape_string($con, $_POST['username']);

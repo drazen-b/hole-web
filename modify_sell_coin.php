@@ -2,7 +2,6 @@
 session_start();
 include 'db.php';
 
-// Check if user is logged in
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit();
@@ -12,7 +11,6 @@ $username = $_SESSION['username'];
 $coinId = $_POST['coinId'];
 $sellAmount = $_POST['sellAmount'];
 
-// Validate sell amount
 if ($sellAmount <= 0) {
     echo '<script type="text/javascript">
     alert("Invalid amount!");
@@ -21,7 +19,6 @@ if ($sellAmount <= 0) {
     exit();
 }
 
-// Get current amount from the database
 $stmt = $con->prepare("SELECT Amount FROM UserCryptoPurchases WHERE UserID = (SELECT UserID FROM UserAccounts WHERE Username = ?) AND CoinID = ?");
 $stmt->bind_param("ss", $username, $coinId);
 $stmt->execute();
@@ -31,20 +28,17 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $currentAmount = $row['Amount'];
 } else {
-    // Handle error - purchase not found
     echo "Purchase not found";
     exit();
 }
 
 $stmt->close();
 
-// Validate if sell amount is not greater than current amount
 if ($sellAmount > $currentAmount) {
     echo "Sell amount is greater than current amount";
     exit();
 }
 
-// Update the amount
 $newAmount = $currentAmount - $sellAmount;
 
 if ($newAmount > 0) {

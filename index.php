@@ -17,6 +17,8 @@ session_start();
 
 <body>
 
+
+
     <div id="title-div">
         <div>
             <h1 id="title">Hole</h1>
@@ -81,22 +83,30 @@ session_start();
         <h2 class="top-100">Top 100 currencies</h2>
 
         <div id="coins-info">
-            <p>#</p>
-            <p>coin</p>
-            <p>price</p>
-            <p>24h</p>
-            <p>24h volume</p>
-            <p>Mkt Cap</p>
+            <p class="coin-rank">#</p>
+            <p class="coin-name">coin</p>
+            <p class="coin-price-2">price</p>
+            <p class="coin-24h">24h</p>
+            <p class="coin-volume">24h volume</p>
+            <p class="coin-mktcap">Mkt Cap</p>
         </div>
-
-
     </div>
+
+
+    <footer>
+        <div class="footer-holder">
+            <p>Web LV3</p>
+            <div>
+                <p>Made by: Drazen Bertic</p>
+                <a href="https://www.coingecko.com/en/api">Powered by CoinGecko API!</a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             let coins = [];
 
-            // Fetch coins from the CoinGecko API and store them in the coins array
             async function fetchCoins() {
                 try {
                     const response = await fetch('https://api.coingecko.com/api/v3/coins/list');
@@ -108,7 +118,6 @@ session_start();
 
             fetchCoins();
 
-            // Regular search function (searches only by coin id)
             function searchCoins(query, list) {
                 return list.filter(coin => coin.id.includes(query));
             }
@@ -122,15 +131,12 @@ session_start();
                 displayResults(results);
             }
 
-            // Trigger search as the user types
             document.querySelector(".round-search-box").addEventListener("input", searchAndDisplay);
 
-            // Function to display the top 10 search results
             function displayResults(results) {
                 const resultsContainer = document.getElementById("search-results");
-                resultsContainer.innerHTML = ''; // Clear previous results
-
-                // Show only the first 10 results
+                resultsContainer.innerHTML = '';
+                s
                 results.slice(0, 10).forEach(coin => {
                     const p = document.createElement("p");
                     p.textContent = `${coin.name} (${coin.symbol}) - ${coin.id}`;
@@ -146,7 +152,6 @@ session_start();
                 }
             }
 
-            // Fetch top coins from the CoinGecko API and display them
             async function fetchAndDisplayTopCoins() {
                 try {
                     const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=eur&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en');
@@ -169,30 +174,25 @@ session_start();
                     const marketCapColor = coin.market_cap_change_percentage < 0 ? 'red' : 'green';
 
                     coinDiv.innerHTML = `
-                <p class="rank">${index + 1}</p>
-                <div>
-                    <img src="${coin.image}" alt="${coin.name} image">
-                    <p>${coin.name}</p>
-                </div>
-                <div>${new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(coin.current_price)}</div>
-                <p style="color:${priceChangeColor}">${coin.price_change_percentage_24h.toFixed(2)}%</p>
-                <p>${new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(coin.total_volume)}</p>
-                <p style="color:${marketCapColor}">${new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(coin.market_cap)}</p>
-            `;
-
+    <p class="coin-rank">${index + 1}</p>
+    <div class="coin-image-name">
+        <img src="${coin.image}" alt="${coin.name} image">
+        <p class="coin-name">${coin.name}</p>
+    </div>
+    <div class="coin-price">${new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(coin.current_price)}</div>
+    <p class="coin-24h" style="color:${priceChangeColor}">${coin.price_change_percentage_24h.toFixed(2)}%</p>
+    <p class="coin-volume">${new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(coin.total_volume)}</p>
+    <p class="coin-mktcap" style="color:${marketCapColor}">${new Intl.NumberFormat('en-EN', { style: 'currency', currency: 'EUR' }).format(coin.market_cap)}</p>`;
                     container.appendChild(coinDiv);
 
                     coinDiv.onclick = function () {
                         showCoinDetails(coin.id);
                     };
-
                 });
 
                 function showCoinDetails(coinId) {
                     window.location.href = `./coin.php?id=${coinId}`;
                 }
-
-
             }
         });
 
@@ -214,8 +214,6 @@ session_start();
             }
         }
     </script>
-
-
 
 </body>
 

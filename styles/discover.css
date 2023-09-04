@@ -48,7 +48,7 @@ body {
 }
 
 #search-container {
-    margin: 10em;
+    margin: 5em;
     text-align: center;
     padding: 2em;       
     justify-content: center;
@@ -69,7 +69,7 @@ body {
     flex-direction: row;
     align-items: center; 
     justify-content: center;
-    position: relative; /* For positioning the search button inside the input */
+    position: relative; 
     gap: 15px;
 }
 
@@ -82,11 +82,11 @@ body {
     padding-left: 15px;
     padding-right: 40px;
     outline: none;
-    font-size: var(--font-size-base); /* Adjust as needed */
+    font-size: var(--font-size-base); 
 }
 
 .round-search-box:focus {
-    border-color: var(--accent-color); /* Gives a focus color when the input is active, adjust color as desired */
+    border-color: var(--accent-color); 
 }
 
 .search-button {
@@ -95,7 +95,7 @@ body {
     cursor: pointer;
     font-size: 16px;
     outline: none;
-    color: #777; /* Adjust the color of the search icon */
+    color: #777; 
 }
 
 #search-results {
@@ -141,7 +141,6 @@ body {
     height: 40px; 
 } */
 
-/* Style for the overall container */
 #top-list-container {
     width: 100%;
     max-width: 1200px;
@@ -149,13 +148,19 @@ body {
     padding: 20px;
 }
 
-#top-list-container > p {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
+#coins-info {
+    margin: 0 auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
 }
 
-/* Styles for the header row */
+#coins-info > p {
+    flex: 1; /* Make each item take equal space */
+    /* margin: 10px 5px; Some margin for spacing */
+    text-align: center; /* Center the text within each item */
+}
+
 #coins-info {
     display: flex;
     flex-direction: row;
@@ -173,16 +178,18 @@ body {
     text-align: center;
 }
 
-
 .coin {
+    margin: 0 auto;
+    width: 90%;
     font-size: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0; /* A light gray border */
+    border-bottom: 1px solid #e0e0e0;
     gap: 20px;
+    text-align: center;
 }
 
 .coin p {
@@ -226,8 +233,6 @@ body {
     padding-top: 60px;
 }
 
-
-
 .loginModal-content {
     background-color: var(--primary-color);
     margin: 5% auto;
@@ -251,18 +256,97 @@ body {
 }
 
 .profile-coins {
-    width: 100%;
+    margin: 0 auto;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
 }
 
 .coin form {
     width: 100%;
     border-bottom: none;
+    margin: auto;
 }
 
 .coin input {
     width: 80%;
 }
 
+footer {
+    margin: auto;
+    margin-top: 2em;
+    padding: 10px 0px;
+    width: 100%;
+}
+
+footer a, footer p {
+    font-size: 1rem;
+}
+
+.footer-holder {
+    margin: 10px auto;
+    width: 90%;
+    max-width: 1000px;
+    background-color: var(--header-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h3 {
+    width: 90%;
+    margin: 30px auto;
+}
+
+.container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;  
+    height: 100vh;        
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+#search-container {
+    flex-direction: column;
+    margin: 1em;
+}
+
+.coin form {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+    justify-content: space-around;
+}
+
+.coin p {
+    font-size: medium;
+    width: 50%;
+}
+
+ .coin-rank, .coin-24h, .coin-volume, .coin-mktcap, .coin-price, .coin-profit, #page-name, #discover-link {
+    display: none;
+}
+    
+#navigation {
+    margin: auto;
+    padding: 10px 0px; 
+    width: 100%;
+}
+
+.footer-holder {
+    flex-direction: column;
+}
+
+#top-list-container {
+    padding: 0;
+}
+
+.top-100 {
+    margin: 10px auto;
+    text-align: center;
+}
+
+}

@@ -49,11 +49,9 @@ div > div {
 }
 
 #coin-description a {
-    color: var(--accent-color); /* Change this to your preferred link color */
+    color: var(--accent-color);
     text-decoration: none;
     font-size: 16px;
-
-    
 }
 
 #coin-description a:hover {
@@ -62,15 +60,15 @@ div > div {
 
 #market-data {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Adjust according to how many columns you want */
-    gap: 50px; /* Space between items */
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
     padding: 20px;
     border-radius: 8px;
 }
 
 .data-item {
     display: flex;
-    justify-content: space-between; /* Separates the label and value */
+    justify-content: space-between;
 }
 
 .label {
@@ -95,7 +93,7 @@ div > div {
 
 #add-to-portfolio {
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondary-color);
     margin: 10px 0;
 }
 
@@ -112,7 +110,7 @@ div > div {
 #add-to-portfolio .data-item input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondary-color);
     border-radius: 5px;
 }
 
@@ -120,7 +118,7 @@ div > div {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #333;
+    background-color: var(--primary-color);
     color: #fff;
     cursor: pointer;
 }
@@ -132,19 +130,68 @@ div > div {
 #add-to-portfolio .data-item input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondary-color);
     border-radius: 5px;
     text-align: end;
     font-size: var(--font-size-base);
     font-family: var(--font-family-base);
     color: var(--accent-color);
-    background-color: var(--tetriary-color); /* gray background */
-    appearance: none; /* remove arrows */
-    -moz-appearance: textfield; /* remove arrows for Firefox */
+    background-color: var(--tetriary-color);
+    appearance: none; 
+    -moz-appearance: textfield; 
 }
 
 #add-to-portfolio .data-item input::-webkit-outer-spin-button,
 #add-to-portfolio .data-item input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+footer {
+    margin: auto;
+    margin-top: 2em;
+    padding: 10px 0px;
+    width: 100%;
+    display: flex;
+}
+
+footer a, footer p {
+    font-size: 1rem;
+}
+
+.footer-holder div {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+
+    body {
+        font-size: large;
+    }
+
+#market-data {
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+}
+
+#market-data span {
+    font-size: large;
+}
+
+#add-to-portfolio {
+    margin: 0 auto;
+    width: 90%;
+}
+
+#title-div {
+    margin-top: 4em;
+    flex-direction: column;
+}
+
+.footer-holder {
+    flex-direction: column;
+}
+
 }

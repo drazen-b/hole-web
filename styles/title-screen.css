@@ -41,3 +41,21 @@
     color: var(--accent-color);
 }
 
+@media screen and (max-width: 768px) {
+
+#title-div {
+    flex-direction: column;
+    text-align: center;
+}
+
+#title-div div {
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+#title, #title-about {
+    text-align: center;
+}
+
+}
