@@ -136,7 +136,7 @@ session_start();
             function displayResults(results) {
                 const resultsContainer = document.getElementById("search-results");
                 resultsContainer.innerHTML = '';
-                s
+                
                 results.slice(0, 10).forEach(coin => {
                     const p = document.createElement("p");
                     p.textContent = `${coin.name} (${coin.symbol}) - ${coin.id}`;
