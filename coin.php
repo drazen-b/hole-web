@@ -71,11 +71,11 @@ session_start();
         <h2>Add to Portfolio</h2>
         <div class="data-item">
             <label for="amount">Amount:</label>
-            <input type="number" id="amount" name="amount" min="0">
+            <input type="number" id="amount" name="amount" min="0" step="0.001">
         </div>
         <div class="data-item">
             <label for="price">Price:</label>
-            <input type="number" id="price" name="price" min="0">
+            <input type="number" id="price" name="price" min="0" step="0.001">
         </div>
         <div>
             <input type="hidden" id="coinId" name="coinId" value="<?php echo $_GET['id']; ?>">
